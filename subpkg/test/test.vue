@@ -1,6 +1,6 @@
 <template>
   <view>
-    cate
+    
   </view>
 </template>
 
@@ -15,9 +15,5 @@
 </script>
 
 <style lang="scss">
-.floor-title {
-  height: 60rpx;
-  width: 100%;
-  display: flex;
-}
+
 </style>

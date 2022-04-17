@@ -51,11 +51,11 @@
         /* 小程序特有相关 */
         "appid" : "wxf8ccafa61b2d5005",
         "setting" : {
-            "urlCheck" : true,
+            "urlCheck" : false,
             "es6" : false,
             "postcss" : false,
             "minified" : false,
-            "checkSiteMap": false
+            "checkSiteMap" : false
         },
         "usingComponents" : true
     }
