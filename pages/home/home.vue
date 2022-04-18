@@ -1,5 +1,8 @@
 <template>
   <view>
+    <view class="search-box">
+      <my-search @myclick='gotoSearch()'></my-search>
+    </view>
     <swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
       <swiper-item v-for="(item,i) in swiperList" :key="i">
         <navigator class="swiper-item" :url="'/subpkg/goods_detail/goods_detail?goods_id=' + item.goods_id">
@@ -92,6 +95,12 @@
         })
         this.floorList = res.message
         uni.$showMsg();
+      },
+      // 收缩事件
+      gotoSearch(){
+        uni.navigateTo({
+          url:"/subpkg/search/search"
+        })
       }
 
     },
@@ -104,6 +113,13 @@
 </script>
 
 <style lang="scss">
+  // 搜索框实现吸顶
+  .search-box{
+    position: sticky;
+    // 吸顶的位置
+    top: 0;
+    z-index: 999;
+  }
   swiper {
     height: 330rpx;
 
