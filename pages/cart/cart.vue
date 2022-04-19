@@ -10,11 +10,6 @@
         <!-- 右侧文本 -->
         <view class="cart-title-text">购物车</view>
       </view>
-
-      <!-- 循环渲染你列表页 -->
-      <block>
-
-      </block>
       <!-- 实现商品的滑动 -->
       <uni-swipe-action>
         <block v-for="(good,i) in cart" :key="i">
@@ -25,10 +20,10 @@
           </uni-swipe-action-item>
         </block>
       </uni-swipe-action>
-      <my-settle></my-settle>
     </view>
+    <my-settle v-if="cart.length !== 0"></my-settle>
     <view class="empty-cart" v-else>
-      购物车是的空的，请添加商品
+      <img src="/static/cart-null.png" >空空如也，请添加商品
     </view>
   </view>
 </template>
