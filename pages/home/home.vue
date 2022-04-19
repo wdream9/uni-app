@@ -32,7 +32,8 @@
           </navigator>
           <!-- 右侧 4 个小图片的盒子 -->
           <view class="right-img-box">
-            <navigator class="right-img-item" v-for="(item2, i2) in item.product_list" :key="i2" v-if="i2 !== 0" :url="item2.url">
+            <navigator class="right-img-item" v-for="(item2, i2) in item.product_list" :key="i2" v-if="i2 !== 0"
+              :url="item2.url">
               <image :src="item2.image_src" mode="widthFix" :style="{width: item2.image_width + 'rpx'}"></image>
             </navigator>
           </view>
@@ -43,7 +44,9 @@
 </template>
 
 <script>
+  import badgeMix from '@/mixins/tabbar-badge.js'
   export default {
+    mixins: [badgeMix],
     data() {
       return {
         swiperList: [],
@@ -62,6 +65,14 @@
           return uni.$showMsg()
         }
         this.swiperList = res.message;
+        // uni.request({
+        //   url: 'https://www.uinav.com/api/public/v1/home/swiperdata', //仅为示例，并非真实接口地址。
+        //   method:"GET",
+        //   success: (res) => {
+        //     console.log("home====>",res.data);
+        //     this.swiperList = res.data.message;
+        //   }
+        // });
         uni.$showMsg('数据请求成功！')
       },
       // 分类导航栏
@@ -69,9 +80,9 @@
         const {
           data: res
         } = await uni.$http.get('/api/public/v1/home/catitems');
-        if (res.meta.status !== 200) return uni.$showMsg("数据加载失败！");
+        if (res.meta.status !== 200) return uni.$showMsg();
         this.navList = res.message;
-        uni.$showMsg()
+        uni.$showMsg('数据加载成功')
       },
       // 分类点击事件
       async navClickHandler(item) {
@@ -88,18 +99,17 @@
           data: res
         } = await uni.$http.get('/api/public/v1/home/floordata')
         if (res.meta.status !== 200) return uni.$showMsg("数据加载失败！")
-        res.message.forEach(floor=>{
-          floor.product_list.forEach(prod=>{
+        res.message.forEach(floor => {
+          floor.product_list.forEach(prod => {
             prod.url = '/subpkg/goods_list/goods_list?' + prod.navigator_url.split('?')[1]
           })
         })
         this.floorList = res.message
-        uni.$showMsg();
       },
       // 收缩事件
-      gotoSearch(){
+      gotoSearch() {
         uni.navigateTo({
-          url:"/subpkg/search/search"
+          url: "/subpkg/search/search"
         })
       }
 
@@ -114,12 +124,13 @@
 
 <style lang="scss">
   // 搜索框实现吸顶
-  .search-box{
+  .search-box {
     position: sticky;
     // 吸顶的位置
     top: 0;
     z-index: 999;
   }
+
   swiper {
     height: 330rpx;
 

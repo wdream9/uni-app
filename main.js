@@ -3,12 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import { $http } from '@escook/request-miniprogram'
-
+import store from '@/store/store.js'
 Vue.config.productionTip = false
 App.mpType = 'app'
 
 const app = new Vue({
-    ...App
+    ...App,
+    store
 })
 app.$mount()
 // #endif
@@ -28,15 +29,15 @@ uni.$http = $http
 // 请求根路径
 $http.baseUrl = "https://www.uinav.com"
 // 请求拦截器
-$http.beforeRequest = function (options) {
-  uni.showLoading({
-    title:"数据加载中..."
-  })
-}
+// $http.beforeRequest = function (options) {
+//   uni.showLoading({
+//     title:"数据加载中..."
+//   })
+// }
 // 响应拦截器
-$http.afterRequest = function () {
-  wx.hideLoading()
-}
+// $http.afterRequest = function () {
+//   wx.hideLoading()
+// }
 uni.$showMsg = function(title='数据加载失败!', duration = 1500){
   uni.showToast({
     title,
